@@ -1,0 +1,50 @@
+﻿@model ConceptMaker.Models.Rule
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Rule</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.CommonConcept.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CommonConcept.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Concept.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Concept.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FirstComponent.Id)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FirstComponent.Id)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SecondComponent.Id)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SecondComponent.Id)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

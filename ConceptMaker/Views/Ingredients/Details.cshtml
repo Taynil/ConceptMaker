@@ -1,0 +1,50 @@
+﻿@model ConceptMaker.Models.Ingredient
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Ingredient</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.BaseInstance.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BaseInstance.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Component.Id)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Component.Id)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SubInstance.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SubInstance.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NumberOfIngredients)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NumberOfIngredients)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
