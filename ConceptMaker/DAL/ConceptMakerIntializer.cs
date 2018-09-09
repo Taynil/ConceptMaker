@@ -134,7 +134,7 @@ namespace ConceptMaker.DAL
             context.SaveChanges();
 
 
-            
+            base.Seed(context);
           
     
 

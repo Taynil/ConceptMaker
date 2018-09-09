@@ -12,8 +12,9 @@ namespace ConceptMaker.DAL
     {
         public ConceptMakerContext() : base("DefaultConnection")
         {
-
+            Database.SetInitializer<ConceptMakerContext>(new ConceptMakerIntializer());
         }
+
 
 
         public virtual DbSet<Instance> Instances { get; set; }
@@ -25,7 +26,9 @@ namespace ConceptMaker.DAL
         public virtual DbSet<Role> Roles { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
+
         {
+            base.OnModelCreating(modelBuilder);
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
             //do errora
             modelBuilder.Conventions.Remove<ManyToManyCascadeDeleteConvention>();

@@ -9,6 +9,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using ConceptMaker.Models;
+using ConceptMaker.DAL;
 
 namespace ConceptMaker.Controllers
 {
@@ -155,6 +156,11 @@ namespace ConceptMaker.Controllers
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
+                    using (var db = new ConceptMakerContext())
+                    {
+                        db.Profiles.Add(new Models.Profile { Username = model.Email, RegisteredDate = DateTime.Now, RoleId = 2 });
+                        db.SaveChanges();
+                    }
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
                     
                     // Aby uzyskać więcej informacji o sposobie włączania potwierdzania konta i resetowaniu hasła, odwiedź stronę https://go.microsoft.com/fwlink/?LinkID=320771
