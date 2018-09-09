@@ -11,117 +11,109 @@ using ConceptMaker.Models;
 
 namespace ConceptMaker.Controllers
 {
-   
-    public class InstancesController : Controller
+    
+    public class RolesController : Controller
     {
+       
         private ConceptMakerContext db = new ConceptMakerContext();
 
-        // GET: Instances
-        
+        // GET: Roles
         public ActionResult Index()
         {
-            var instances = db.Instances.Include(i => i.Concept);
-            return View(instances.ToList());
+            return View(db.Roles.ToList());
         }
 
-        // GET: Instances/Details/5
-       
+        // GET: Roles/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Instance instance = db.Instances.Find(id);
-            if (instance == null)
+            Role role = db.Roles.Find(id);
+            if (role == null)
             {
                 return HttpNotFound();
             }
-            return View(instance);
+            return View(role);
         }
 
-        // GET: Instances/Create
-        
+        // GET: Roles/Create
         public ActionResult Create()
         {
-            ViewBag.ConceptId = new SelectList(db.Concepts, "Id", "Name");
             return View();
         }
 
-        // POST: Instances/Create
+        // POST: Roles/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,ConceptId,Name,Description")] Instance instance)
+        public ActionResult Create([Bind(Include = "Id,Name,PolishName")] Role role)
         {
             if (ModelState.IsValid)
             {
-                db.Instances.Add(instance);
+                db.Roles.Add(role);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.ConceptId = new SelectList(db.Concepts, "Id", "Name", instance.ConceptId);
-            return View(instance);
+            return View(role);
         }
 
-        // GET: Instances/Edit/5
-        
+        // GET: Roles/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Instance instance = db.Instances.Find(id);
-            if (instance == null)
+            Role role = db.Roles.Find(id);
+            if (role == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.ConceptId = new SelectList(db.Concepts, "Id", "Name", instance.ConceptId);
-            return View(instance);
+            return View(role);
         }
 
-        // POST: Instances/Edit/5
+        // POST: Roles/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,ConceptId,Name,Description")] Instance instance)
+        public ActionResult Edit([Bind(Include = "Id,Name,PolishName")] Role role)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(instance).State = EntityState.Modified;
+                db.Entry(role).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.ConceptId = new SelectList(db.Concepts, "Id", "Name", instance.ConceptId);
-            return View(instance);
+            return View(role);
         }
 
-        // GET: Instances/Delete/5
+        // GET: Roles/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Instance instance = db.Instances.Find(id);
-            if (instance == null)
+            Role role = db.Roles.Find(id);
+            if (role == null)
             {
                 return HttpNotFound();
             }
-            return View(instance);
+            return View(role);
         }
 
-        // POST: Instances/Delete/5
+        // POST: Roles/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Instance instance = db.Instances.Find(id);
-            db.Instances.Remove(instance);
+            Role role = db.Roles.Find(id);
+            db.Roles.Remove(role);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

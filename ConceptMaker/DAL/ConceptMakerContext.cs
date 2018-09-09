@@ -16,16 +16,20 @@ namespace ConceptMaker.DAL
         }
 
 
-        public DbSet<Instance> Instances { get; set; }
-        public DbSet<Component> Components { get; set; }
-        public DbSet<Concept> Concepts { get; set; }
-        public DbSet<Law> Laws { get; set; }
-        public DbSet<Ingredient> Ingredients { get; set; }
-        public DbSet<Profile> Profiles { get; set; }
+        public virtual DbSet<Instance> Instances { get; set; }
+        public virtual DbSet<Component> Components { get; set; }
+        public virtual  DbSet<Concept> Concepts { get; set; }
+        public virtual DbSet<Law> Laws { get; set; }
+        public virtual DbSet<Ingredient> Ingredients { get; set; }
+        public virtual DbSet<Profile> Profiles { get; set; }
+        public virtual DbSet<Role> Roles { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
+            //do errora
+            modelBuilder.Conventions.Remove<ManyToManyCascadeDeleteConvention>();
+            modelBuilder.Conventions.Remove<OneToManyCascadeDeleteConvention>();
         }
     }
 }

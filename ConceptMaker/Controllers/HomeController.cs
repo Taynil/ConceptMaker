@@ -6,6 +6,7 @@ using System.Web.Mvc;
 
 namespace ConceptMaker.Controllers
 {
+    
     public class HomeController : Controller
     {
         public ActionResult Index()
@@ -15,14 +16,14 @@ namespace ConceptMaker.Controllers
 
         public ActionResult About()
         {
-            ViewBag.Message = "Your application description page.";
+            ViewBag.Message = "O mnie";
 
             return View();
         }
 
         public ActionResult Contact()
         {
-            ViewBag.Message = "Your contact page.";
+            ViewBag.Message = "Dane kontaktowe";
 
             return View();
         }

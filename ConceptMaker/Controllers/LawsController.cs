@@ -11,6 +11,7 @@ using ConceptMaker.Models;
 
 namespace ConceptMaker.Controllers
 {
+   
     public class LawsController : Controller
     {
         private ConceptMakerContext db = new ConceptMakerContext();

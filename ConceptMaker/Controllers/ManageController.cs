@@ -10,7 +10,7 @@ using ConceptMaker.Models;
 
 namespace ConceptMaker.Controllers
 {
-    [Authorize]
+    
     public class ManageController : Controller
     {
         private ApplicationSignInManager _signInManager;

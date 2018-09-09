@@ -3,12 +3,13 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 
 namespace ConceptMaker.DAL
 {
-    public class ConceptMakerIntializer : System.Data.Entity.DropCreateDatabaseIfModelChanges<ConceptMakerContext>
+    public class ConceptMakerIntializer : DropCreateDatabaseAlways<ConceptMakerContext>
     {
         protected override void Seed(ConceptMakerContext context)
         {
@@ -20,13 +21,42 @@ namespace ConceptMaker.DAL
             public DbSet<Reguly> Reguly { get; set; }
             public DbSet<Skladowe> Skladowe { get; set; } */
 
+            var roleManager = new RoleManager<IdentityRole>(
+                new RoleStore<IdentityRole>(new ApplicationDbContext()));
+            var userManager = new UserManager<ApplicationUser>(
+                new UserStore<ApplicationUser>(new ApplicationDbContext()));
+            var user1 = new ApplicationUser { UserName = "admin@gmail.com", Email = "admin@gmail.com" };
+            var user2 = new ApplicationUser { UserName = "user@gmail.com", Email = "user@gmail.com" };
+            userManager.Create(user1, "Admin@123");
+            userManager.Create(user2, "User@123");
+            roleManager.Create(new IdentityRole("Admin"));
+            roleManager.Create(new IdentityRole("Client"));
+
+            userManager.AddToRole(user1.Id, "Admin");
+            userManager.AddToRole(user2.Id, "Client");
+            var roles = new List<Role>
+            {
+                new Role { Name = "Admin", PolishName = "Admin"},
+                new Role { Name = "Client", PolishName = "Klient"}
+            };
+            roles.ForEach(r => context.Roles.Add(r));
+            context.SaveChanges();
             var profiles = new List<Profile>
             {
-                new Profile{ Username = "admin"},
+                new Profile
+                {
+                    Username = "admin@gmail.com",
+                     RoleId = 1,
+                    RegisteredDate = DateTime.Now
+                },
+                new Profile
+                {
+                    Username = "user@gmail.com",
+                    RoleId = 2,
+                    RegisteredDate = DateTime.Now
+                }
 
             };
-            profiles.ForEach(p => context.Profiles.Add(p));
-            context.SaveChanges();
 
 
             var concepts = new List<Concept> //ok
@@ -105,18 +135,7 @@ namespace ConceptMaker.DAL
 
 
             
-            var roleManager = new RoleManager<IdentityRole>(
-                   new RoleStore<IdentityRole>(new ApplicationDbContext()));
-            var userManager = new UserManager<ApplicationUser>(
-                new UserStore<ApplicationUser>(new ApplicationDbContext()));
-
-            roleManager.Create(new IdentityRole("admin"));
-            var user = new ApplicationUser { UserName = "qwert.1@wp.pl" };
-            string pass = "haslo1";
-
-            userManager.Create(user, pass);
-            userManager.AddToRole(user.Id, "admin");
-
+          
     
 
         }

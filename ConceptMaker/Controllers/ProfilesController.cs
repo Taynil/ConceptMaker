@@ -13,15 +13,18 @@ namespace ConceptMaker.Controllers
 {
     public class ProfilesController : Controller
     {
+        
         private ConceptMakerContext db = new ConceptMakerContext();
 
         // GET: Profiles
+        [Authorize(Roles = "Admin")]
         public ActionResult Index()
         {
             return View(db.Profiles.ToList());
         }
 
         // GET: Profiles/Details/5
+        [Authorize(Roles = "Admin")]
         public ActionResult Details(int? id)
         {
             if (id == null)

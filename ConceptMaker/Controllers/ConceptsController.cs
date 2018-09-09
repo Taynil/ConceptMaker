@@ -16,12 +16,14 @@ namespace ConceptMaker.Controllers
         private ConceptMakerContext db = new ConceptMakerContext();
 
         // GET: Concepts
+        
         public ActionResult Index()
         {
             return View(db.Concepts.ToList());
         }
 
         // GET: Concepts/Details/5
+        [Authorize(Roles = "Admin")]
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -37,6 +39,7 @@ namespace ConceptMaker.Controllers
         }
 
         // GET: Concepts/Create
+        [Authorize]
         public ActionResult Create()
         {
             return View();

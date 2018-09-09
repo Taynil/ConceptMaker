@@ -11,6 +11,7 @@ using ConceptMaker.Models;
 
 namespace ConceptMaker.Controllers
 {
+   
     public class IngredientsController : Controller
     {
         private ConceptMakerContext db = new ConceptMakerContext();
