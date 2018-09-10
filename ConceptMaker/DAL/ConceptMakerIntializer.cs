@@ -9,7 +9,7 @@ using System.Web;
 
 namespace ConceptMaker.DAL
 {
-    public class ConceptMakerIntializer : DropCreateDatabaseIfModelChanges<ConceptMakerContext>
+    public class ConceptMakerIntializer : DropCreateDatabaseAlways<ConceptMakerContext>
     {
         protected override void Seed(ConceptMakerContext context)
         {
@@ -64,7 +64,8 @@ namespace ConceptMaker.DAL
         new Concept { Name = "Plyta_Glowna" },
         new Concept { Name = "Gniazdo_Procesora" },
         new Concept { Name = "Procesor"},
-        new Concept { Name = "Typ_Ramu" }
+        new Concept { Name = "Typ_Ramu DDR_" },
+        new Concept { Name = "Pamiec_RAM" }
        };
             concepts.ForEach(s => context.Concepts.Add(s));
             context.SaveChanges();
@@ -73,7 +74,8 @@ namespace ConceptMaker.DAL
         {
          new Component{ ConceptId= 1,  SubConceptId=2, Required=true }, //plyta > gniazdoproca
          new Component{ ConceptId= 1,  SubConceptId=4, Required=true }, //plyta > ram
-         new Component{ ConceptId= 3,  SubConceptId=2, Required=true } // procseor > gniazdo
+         new Component{ ConceptId= 3,  SubConceptId=2, Required=true }, // procseor > gniazdo
+         new Component{ ConceptId= 5,  SubConceptId=4, Required=true } // Ram > typ pamieci
         };
             components.ForEach(s => context.Components.Add(s));
             context.SaveChanges();
@@ -83,15 +85,38 @@ namespace ConceptMaker.DAL
         {
          /*1*/    new Instance { ConceptId = 1, Name = "ASRock H310M-HDV", Description = "Plyta glwona H310" },
            /*2*/    new Instance { ConceptId = 1, Name = "MSI Z370 GAMING PLUS", Description = "Plyta glwona msi z370" },
+           /*3*/    new Instance { ConceptId = 1, Name = "Gigabyte Z370 AORUS Gaming K3", Description = "Plyta Gigabyte Z370 AORUS Gaming K3" },
+           /*4*/    new Instance { ConceptId = 1, Name = "ASRock Z370 EXTREME 4", Description = "Plyta glwona ASRock Z370 EXTREME 4" },
+           /*5*/    new Instance { ConceptId = 1, Name = "ASRock H110M DVS R3.0", Description = "Plyta glwona ASRock H110M DVS R3.0" },
+           /*6*/    new Instance { ConceptId = 1, Name = "Gigabyte GA-H110M-S2H", Description = "Plyta glwona Gigabyte GA-H110M-S2H" },
+           /*7*/    new Instance { ConceptId = 1, Name = "ASRock B250M-HDV", Description = "Plyta glwona ASRock B250M-HDV" },
+           /*8*/    new Instance { ConceptId = 1, Name = "Gigabyte GA-B250M-D3H", Description = "Gigabyte GA-B250M-D3H" },
 
-           /*3*/    new Instance { ConceptId = 2, Name = "Socket 1151", Description = "gniazdo 1151" },
-           /*4*/    new Instance { ConceptId = 2, Name = "Socket 1151 (Coffee Lake)", Description = "gniazdo 1151 (Coffee Lake)" },
+           /*9*/    new Instance { ConceptId = 2, Name = "Socket 1151", Description = "gniazdo 1151" },
+           /*10*/    new Instance { ConceptId = 2, Name = "Socket 1151 (Coffee Lake)", Description = "gniazdo 1151 (Coffee Lake)" },
+            /*11*/    new Instance { ConceptId = 2, Name = "Socket AM4", Description = "gniazdo Socket AM4" },
 
-            /*5*/   new Instance { ConceptId = 3, Name = "Intel Core i5-7400", Description = "Procesor i57400" },
-           /*6*/    new Instance { ConceptId = 3, Name = "Intel Pentium G4560, 3.5GHz", Description = "procesor G4560" },
 
-            /*7*/   new Instance { ConceptId = 4, Name = "DDR4", Description = "Typ RAM DDR4" },
-             /*8*/  new Instance { ConceptId = 4, Name = "DDR3", Description = "Typ Ram DDR3" }
+            /*12*/   new Instance { ConceptId = 3, Name = "Intel Core i5-7400", Description = "Procesor i57400" },
+           /*13*/    new Instance { ConceptId = 3, Name = "Intel Pentium G4560, 3.5GHz", Description = "procesor G4560" },
+           /*14*/   new Instance { ConceptId = 3, Name = "AMD Ryzen 3 2200G, 3.5GHz, 4MB", Description = "Procesor AMD Ryzen 3 2200G, 3.5GHz, 4MB" },
+           /*15*/    new Instance { ConceptId = 3, Name = "AMD Ryzen 5 1400, 3.2GHz, 8MB", Description = "procesor AMD Ryzen 5 1400, 3.2GHz, 8MB" },
+           /*16*/   new Instance { ConceptId = 3, Name = "Intel Core i3-7100, 3.9GHz, 3MB BOX", Description = "Procesor Intel Core i3-7100, 3.9GHz, 3MB BOX" },
+           /*17*/    new Instance { ConceptId = 3, Name = "Intel Core i7-8700, 3.20GHz, 12MB", Description = "Intel Core i7-8700, 3.20GHz, 12MB" },
+
+
+
+            /*18*/   new Instance { ConceptId = 4, Name = "DDR4", Description = "Typ RAM DDR4" },
+             /*19*/  new Instance { ConceptId = 4, Name = "DDR3", Description = "Typ Ram DDR3" },
+
+             /*20*/   new Instance { ConceptId = 5, Name = "HyperX Predator DDR4, 2x8GB, 3000MHz", Description = "Pamięć HyperX Predator DDR4, 2x8GB, 3000MHz" },
+             /*21*/  new Instance { ConceptId = 5, Name = "ADATA XPG Z1 DDR4 2666 DIMM 8GB CL16 Red", Description = "Pamięć ADATA XPG Z1 DDR4 2666 DIMM 8GB CL16 Red" },
+             /*22*/   new Instance { ConceptId = 5, Name = "Ballistix Sport LT, DDR4, 2x4GB, 2666MHz, CL16", Description = "Pamięć Ballistix Sport LT, DDR4, 2x4GB, 2666MHz" },
+
+            /*23*/    new Instance { ConceptId = 1, Name = "Płyta główna MSI B350 TOMAHAWK", Description = "Płyta główna MSI B350 TOMAHAWK "},
+
+
+
 
 
         };
@@ -104,12 +129,40 @@ namespace ConceptMaker.DAL
              public int LiczbaSkladowych { get; set; }*/
             var ingredients = new List<Ingredient>
         {
-            new Ingredient { BaseInstanceId = 1, ComponentId = 1, SubInstanceId = 3,NumberOfIngredients=1  }, //plyta 1 ma gniazdo 3
-            new Ingredient { BaseInstanceId = 2, ComponentId = 1, SubInstanceId = 4,NumberOfIngredients=1  }, //plyta 2 ma gniazdo 4
-            new Ingredient { BaseInstanceId = 5, ComponentId = 3, SubInstanceId = 3,NumberOfIngredients=1  }, //procseor 5> gniazdo 3
-            new Ingredient { BaseInstanceId = 6, ComponentId = 3, SubInstanceId = 3,NumberOfIngredients=1  }, //procseor 6> gniazdo 3
-            new Ingredient { BaseInstanceId = 1, ComponentId = 2, SubInstanceId = 7,NumberOfIngredients=2  }, //PLYTA 1 ma ram 7
-            new Ingredient { BaseInstanceId = 2, ComponentId = 2, SubInstanceId = 7,NumberOfIngredients=4  } //PLYTA 2 ma ram 7
+            new Ingredient { BaseInstanceId = 1, ComponentId = 1, SubInstanceId = 9,NumberOfIngredients=1  }, //plyta 1 ma gniazdo 9
+            new Ingredient { BaseInstanceId = 2, ComponentId = 1, SubInstanceId = 9,NumberOfIngredients=1  }, //plyta 2 ma gniazdo 9
+            new Ingredient { BaseInstanceId = 3, ComponentId = 1, SubInstanceId = 9,NumberOfIngredients=1  }, //plyta 3 ma gniazdo 9
+            new Ingredient { BaseInstanceId = 4, ComponentId = 1, SubInstanceId = 9,NumberOfIngredients=1  }, //plyta 4 ma gniazdo 9
+            new Ingredient { BaseInstanceId = 5, ComponentId = 1, SubInstanceId = 9,NumberOfIngredients=1  }, //plyta 5 ma gniazdo 9
+            new Ingredient { BaseInstanceId = 6, ComponentId = 1, SubInstanceId = 10,NumberOfIngredients=1  }, //plyta 6 ma gniazdo 10
+            new Ingredient { BaseInstanceId = 7, ComponentId = 1, SubInstanceId = 10,NumberOfIngredients=1  }, //plyta 7 ma gniazdo 10
+            new Ingredient { BaseInstanceId = 8, ComponentId = 1, SubInstanceId = 10,NumberOfIngredients=1  }, //plyta 8 ma gniazdo 10
+            new Ingredient { BaseInstanceId = 23, ComponentId = 1, SubInstanceId = 11,NumberOfIngredients=1  }, //plyta 23 ma gniazdo 11
+
+            new Ingredient { BaseInstanceId = 12, ComponentId = 3, SubInstanceId = 9,NumberOfIngredients=1  }, //procseor 12> gniazdo 9
+            new Ingredient { BaseInstanceId = 13, ComponentId = 3, SubInstanceId = 9,NumberOfIngredients=1  }, //procseor 13> gniazdo 9
+            new Ingredient { BaseInstanceId = 14, ComponentId = 3, SubInstanceId = 11,NumberOfIngredients=1  }, //procseor 14> gniazdo 11
+            new Ingredient { BaseInstanceId = 15, ComponentId = 3, SubInstanceId = 11,NumberOfIngredients=1  }, //procseor 15> gniazdo 11
+            new Ingredient { BaseInstanceId = 16, ComponentId = 3, SubInstanceId = 10,NumberOfIngredients=1  }, //procseor 16> gniazdo 10
+            new Ingredient { BaseInstanceId = 17, ComponentId = 3, SubInstanceId = 10,NumberOfIngredients=1  }, //procseor 17> gniazdo 10
+
+
+
+            new Ingredient { BaseInstanceId = 1, ComponentId = 2, SubInstanceId = 18,NumberOfIngredients=2  }, //PLYTA 1 ma ram 18
+            new Ingredient { BaseInstanceId = 2, ComponentId = 2, SubInstanceId = 18,NumberOfIngredients=2  }, //PLYTA 2 ma ram 18
+            new Ingredient { BaseInstanceId = 3, ComponentId = 2, SubInstanceId = 18,NumberOfIngredients=2  }, //PLYTA 3 ma ram 18
+            new Ingredient { BaseInstanceId = 4, ComponentId = 2, SubInstanceId = 18,NumberOfIngredients=4  }, //PLYTA 4 ma ram 18
+            new Ingredient { BaseInstanceId = 5, ComponentId = 2, SubInstanceId = 18,NumberOfIngredients=4  }, //PLYTA 5 ma ram 18
+            new Ingredient { BaseInstanceId = 6, ComponentId = 2, SubInstanceId = 18,NumberOfIngredients=4  }, //PLYTA 6 ma ram 18
+            new Ingredient { BaseInstanceId = 7, ComponentId = 2, SubInstanceId = 18,NumberOfIngredients=4  }, //PLYTA 7 ma ram 18
+            new Ingredient { BaseInstanceId = 8, ComponentId = 2, SubInstanceId = 18,NumberOfIngredients=4  }, //PLYTA 8 ma ram 18
+            new Ingredient { BaseInstanceId = 23, ComponentId = 2, SubInstanceId = 18,NumberOfIngredients=2  }, //plyta 23 ma ram 18
+
+            new Ingredient { BaseInstanceId = 20, ComponentId = 4, SubInstanceId = 18,NumberOfIngredients=1  }, //RAM 20 ma TYP 18
+            new Ingredient { BaseInstanceId = 21, ComponentId = 4, SubInstanceId = 18,NumberOfIngredients=1  }, //RAM 21 ma typ 18
+            new Ingredient { BaseInstanceId = 22, ComponentId = 4, SubInstanceId = 18,NumberOfIngredients=1  }, //RAM 22 ma typ 18
+
+           
 
 
         };
