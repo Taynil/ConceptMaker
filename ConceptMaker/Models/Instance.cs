@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Web;
 
@@ -9,8 +10,11 @@ namespace ConceptMaker.Models
     {
 
         public int Id { get; set; }
+        [DisplayName("Id pojecia")]
         public int ConceptId { get; set; }
+        [DisplayName("Nazwa")]
         public string Name { get; set; }
+        [DisplayName("Opis")]
         public string Description { get; set; }
 
         public virtual ICollection<Ingredient> Ingredients { get; set; } //czy do pojecia? do skladowych tak

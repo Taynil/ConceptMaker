@@ -9,7 +9,7 @@ using System.Web;
 
 namespace ConceptMaker.DAL
 {
-    public class ConceptMakerIntializer : DropCreateDatabaseAlways<ConceptMakerContext>
+    public class ConceptMakerIntializer : DropCreateDatabaseIfModelChanges<ConceptMakerContext>
     {
         protected override void Seed(ConceptMakerContext context)
         {

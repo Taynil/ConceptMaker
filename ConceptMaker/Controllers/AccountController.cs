@@ -160,6 +160,7 @@ namespace ConceptMaker.Controllers
                     {
                         db.Profiles.Add(new Models.Profile { Username = model.Email, RegisteredDate = DateTime.Now, RoleId = 2 });
                         db.SaveChanges();
+
                     }
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
                     

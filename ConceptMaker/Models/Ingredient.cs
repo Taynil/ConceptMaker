@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
@@ -8,9 +9,13 @@ namespace ConceptMaker.Models
     public class Ingredient //skladowe
     {
         public int Id { get; set; }
+        [Display(Name = "Id instancji bazowej")]
         public int BaseInstanceId { get; set; }
+        [Display(Name = "Id Komponentu")]
         public int ComponentId { get; set; }
+        [Display(Name = "Id instancji skladowej")]
         public int SubInstanceId { get; set; }
+        [Display(Name = "Liczba skladowych")]
         public int NumberOfIngredients { get; set; }
 
 

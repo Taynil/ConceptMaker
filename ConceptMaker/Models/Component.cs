@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Web;
 
@@ -8,11 +9,11 @@ namespace ConceptMaker.Models
     public class Component //komponenty
     {
         public int Id { get; set; }
-
+        [DisplayName("Id pojecia")]
         public int ConceptId { get; set; }
-
+        [DisplayName("Id pod pojecia")]
         public int SubConceptId { get; set; }
-
+        [DisplayName("Czy wymagane?")]
         public bool Required { get; set; }
 
 

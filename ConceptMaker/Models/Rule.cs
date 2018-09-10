@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Web;
 
@@ -10,12 +11,17 @@ namespace ConceptMaker.Models
 
         public int Id { get; set; }
 
+        [DisplayName("Id pojecia")]
         public int ConceptId { get; set; }
 
+        [DisplayName("Id pierwszego komponentu")]
         public int FirstComponentId { get; set; }
 
+        [DisplayName("Id drugiego komponentu")]
         public int SecondComponentId { get; set; }
 
+
+        [DisplayName("Id wspolnego pojecia")]
         public int CommonConceptId { get; set; }
 
 
