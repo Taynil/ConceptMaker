@@ -1,4 +1,4 @@
-﻿@model IEnumerable<ConceptMaker.Models.Rule>
+﻿@model IEnumerable<ConceptMaker.Models.Law>
 
 @{
     ViewBag.Title = "Index";
@@ -41,9 +41,9 @@
             @Html.DisplayFor(modelItem => item.SecondComponent.Id)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+            @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+            @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+            @Html.ActionLink("Delete", "Delete", new { id = item.Id })
         </td>
     </tr>
 }

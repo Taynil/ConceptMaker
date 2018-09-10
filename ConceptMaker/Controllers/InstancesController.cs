@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using ConceptMaker.DAL;
 using ConceptMaker.Models;
+using PagedList;
 
 namespace ConceptMaker.Controllers
 {
@@ -18,10 +19,45 @@ namespace ConceptMaker.Controllers
 
         // GET: Instances
         
-        public ActionResult Index()
+        public ActionResult Index(string sortOrder, string currentFilter, string searchString, int? page)
         {
-            var instances = db.Instances.Include(i => i.Concept);
-            return View(instances.ToList());
+            
+            ViewBag.CurrentSort = sortOrder;
+            ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "name_desc1" : "";
+
+
+
+            if (searchString != null)
+            {
+                page = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
+            }
+
+            ViewBag.CurrentFilter = searchString;
+
+            var instances = from s in db.Instances.Include(i => i.Concept) select s;
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                instances = instances.Where(s => s.Name.Contains(searchString)
+                                       || s.Description.Contains(searchString));
+            }
+            switch (sortOrder)
+            {
+                case "name_desc1":
+                    instances = instances.OrderByDescending(s => s.Name);
+                    break;
+                 default:
+                    instances = instances.OrderBy(s => s.Name);
+                    break;
+            }
+            int pageSize = 8;
+            int pageNumber = (page ?? 1);
+            return View(instances.OrderBy(i =>i.Name).ToPagedList(pageNumber, pageSize));
+            //return View(instances.ToList());
         }
 
         // GET: Instances/Details/5

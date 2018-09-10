@@ -17,9 +17,24 @@ namespace ConceptMaker.Controllers
 
         // GET: Concepts
         
-        public ActionResult Index()
+        public ActionResult Index(string sortOrder)
         {
-            return View(db.Concepts.ToList());
+
+            ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+            ViewBag.DateSortParm = sortOrder == "Date" ? "date_desc" : "Date";
+            var concept = from s in db.Concepts
+                           select s;
+            switch (sortOrder)
+            {
+                case "name_desc":
+                    concept = concept.OrderByDescending(s => s.Name);
+                    break;
+           
+                default:
+                    concept = concept.OrderBy(s => s.Name);
+                    break;
+            }
+            return View(concept.ToList());
         }
 
         // GET: Concepts/Details/5
