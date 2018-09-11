@@ -1,7 +1,7 @@
 ﻿@model ConceptMaker.Models.Ingredient
 
 @{
-    ViewBag.Title = "Edit";
+    ViewBag.Title = "Edycja";
 }
 
 <h2>Edit</h2>
@@ -12,13 +12,13 @@
     @Html.AntiForgeryToken()
     
     <div class="form-horizontal">
-        <h4>Ingredient</h4>
+        <h4>Składowe</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.Id)
 
         <div class="form-group">
-            @Html.LabelFor(model => model.BaseInstanceId, "BaseInstanceId", htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.BaseInstanceId, "Instancja Bazowa", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.DropDownList("BaseInstanceId", null, htmlAttributes: new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.BaseInstanceId, "", new { @class = "text-danger" })
@@ -26,7 +26,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.ComponentId, "ComponentId", htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.ComponentId, "Id  komponentu", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.DropDownList("ComponentId", null, htmlAttributes: new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.ComponentId, "", new { @class = "text-danger" })
@@ -34,7 +34,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.SubInstanceId, "SubInstanceId", htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.SubInstanceId, "Instancja skladowa", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.DropDownList("SubInstanceId", null, htmlAttributes: new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.SubInstanceId, "", new { @class = "text-danger" })
@@ -51,14 +51,14 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
+                <input type="submit" value="Zapisz" class="btn btn-default" />
             </div>
         </div>
     </div>
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Powrót do listy", "Index")
 </div>
 
 @section Scripts {

@@ -91,6 +91,12 @@ namespace ConceptMaker.Controllers
             }
             return View(concept);
         }
+        [AllowAnonymous]
+        public ContentResult GetCount()
+        {
+            var count = db.Concepts.Count();
+            return Content(count.ToString());
+        }
 
         // POST: Concepts/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 

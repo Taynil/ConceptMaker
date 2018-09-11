@@ -1,7 +1,33 @@
 ﻿@{
-    ViewBag.Title = "O mnie";
+    ViewBag.Title = "O programie i troche o mnie";
 }
 <h2>@ViewBag.Title.</h2>
 <h3>@ViewBag.Message</h3>
+@{
+    var count = Int32.Parse(Html.Action("GetCount", "Concepts").ToString());
+}
+<p>
+    Aplikacja powstala w ramach projketu do przedmiotu Programowanie zaawansowane
+    Sluzy do dobierania komponentow do wybranego sprzetu
+    W tej chwili jest zarejestrowanych: 
 
-<p>Student, ale co to za zycie byc studentem</p>
+    @count
+    @if (count == 1)
+    {
+        <text>pojecie.</text>
+    }
+    else if (count % 10 == 1)
+    {
+        <text>pojęć.</text>
+    }
+    @if (count % 10 > 1 && count % 10 < 5)
+    {
+        <text>pojęia.</text>
+    }
+    @if (count % 10 > 4)
+    {
+        <text>pojęć.</text>
+    }
+    które pozwalają na ich podstawie zdefiniować określony sprzęt
+</p>
+
