@@ -308,16 +308,10 @@
     <Content Include="Views\Instances\Details.cshtml" />
     <Content Include="Views\Instances\Edit.cshtml" />
     <Content Include="Views\Instances\Index.cshtml" />
-    <Content Include="Views\Profiles\Create.cshtml" />
     <Content Include="Views\Profiles\Delete.cshtml" />
     <Content Include="Views\Profiles\Details.cshtml" />
     <Content Include="Views\Profiles\Edit.cshtml" />
     <Content Include="Views\Profiles\Index.cshtml" />
-    <Content Include="Views\Rules\Create.cshtml" />
-    <Content Include="Views\Rules\Delete.cshtml" />
-    <Content Include="Views\Rules\Details.cshtml" />
-    <Content Include="Views\Rules\Edit.cshtml" />
-    <Content Include="Views\Rules\Index.cshtml" />
     <Content Include="Views\Laws\Create.cshtml" />
     <Content Include="Views\Laws\Delete.cshtml" />
     <Content Include="Views\Laws\Details.cshtml" />
