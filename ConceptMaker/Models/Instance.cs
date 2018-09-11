@@ -16,6 +16,8 @@ namespace ConceptMaker.Models
         public string Name { get; set; }
         [DisplayName("Opis")]
         public string Description { get; set; }
+        [DisplayName("Obrazek")]
+        public string Obrazek { get; set; }
 
         public virtual ICollection<Ingredient> Ingredients { get; set; } //czy do pojecia? do skladowych tak
         public virtual Concept Concept { get; set; }

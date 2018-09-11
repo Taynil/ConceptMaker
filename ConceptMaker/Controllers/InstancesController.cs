@@ -93,6 +93,14 @@ namespace ConceptMaker.Controllers
         {
             if (ModelState.IsValid)
             {
+                UpdateModel(instance);
+                HttpPostedFileBase file = Request.Files["plikZObrazkiem"];
+                if (file != null && file.ContentLength > 0)
+                {
+                    instance.Obrazek = file.FileName;
+                    file.SaveAs(HttpContext.Server.MapPath("~/Obrazki/") + instance.Obrazek);
+                }
+
                 db.Instances.Add(instance);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -128,6 +136,13 @@ namespace ConceptMaker.Controllers
         {
             if (ModelState.IsValid)
             {
+                UpdateModel(instance);
+                HttpPostedFileBase file = Request.Files["plikZObrazkiem"];
+                if (file != null && file.ContentLength > 0)
+                {
+                    instance.Obrazek = file.FileName;
+                    file.SaveAs(HttpContext.Server.MapPath("~/Obrazki/") + instance.Obrazek);
+                }
                 db.Entry(instance).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
