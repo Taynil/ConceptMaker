@@ -11,7 +11,7 @@ using ConceptMaker.Models;
 
 namespace ConceptMaker.Controllers
 {
-   
+    [Authorize(Roles = "Admin")]
     public class IngredientsController : Controller
     {
         private ConceptMakerContext db = new ConceptMakerContext();

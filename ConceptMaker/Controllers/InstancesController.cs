@@ -12,7 +12,7 @@ using PagedList;
 
 namespace ConceptMaker.Controllers
 {
-   
+    [Authorize(Roles = "Admin")]
     public class InstancesController : Controller
     {
         private ConceptMakerContext db = new ConceptMakerContext();

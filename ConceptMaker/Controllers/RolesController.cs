@@ -11,7 +11,7 @@ using ConceptMaker.Models;
 
 namespace ConceptMaker.Controllers
 {
-    
+    [Authorize(Roles = "Admin")]
     public class RolesController : Controller
     {
        
