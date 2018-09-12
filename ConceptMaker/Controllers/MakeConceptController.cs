@@ -41,45 +41,31 @@ namespace ConceptMaker.Controllers
         }
 
        
-        /*
-        public ActionResult ChoseInstance(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-          
-            var InstancesList = db.Instances.Where(r=> r.ConceptId==id).ToList();
-     
-            return View(InstancesList);
-        }
-        */
+      
         [HttpGet]
         public ActionResult ChoseInstance(int? id)
         {
 
             var InstancesList = db.Instances.Where(r => r.ConceptId == id).ToList();
 
-            // ViewBag.ConceptId = new SelectList(db.Concepts, "Id", "Name", component.ConceptId);
-            // ViewBag.SubConceptId = new SelectList(db.Concepts, "Id", "Name", component.SubConceptId);
             return View(InstancesList);
-            // return View(InstancesList);
-        }
-        //otrzymane pojecie postem  wersja w chuj 10
-        /*
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult ChoseInstance([Bind(Include = "Id,ConceptId,SubConceptId,Required")]Instance instance)
-        {
-           
-            var instances = db.Instances.Where(r=>r.ConceptId==.Find("ConceptId")).ToList();
-
-            // ViewBag.ConceptId = new SelectList(db.Concepts, "Id", "Name", component.ConceptId);
-            // ViewBag.SubConceptId = new SelectList(db.Concepts, "Id", "Name", component.SubConceptId);
-           return View(instances);
-           // return View(InstancesList);
-        }
-        */
         
+        }
+
+
+        [HttpGet]
+        public ActionResult ChoseIngredients(int? id, int? idconceptu)
+        {
+            List<Ingredient> lista = new List<Ingredient>();
+            var IngredientList = db.Ingredients.Where(r => r.BaseInstanceId == id).ToList();
+            foreach (var item in IngredientList)
+            {
+                var list = db.Ingredients.Where(i => i.SubInstanceId == item.SubInstanceId && i.BaseInstance.ConceptId != idconceptu).ToList();
+                lista.AddRange(list);
+            }
+
+
+            return View(lista);
+        }
     }
 }

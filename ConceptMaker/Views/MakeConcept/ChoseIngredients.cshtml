@@ -1,16 +1,17 @@
-﻿@model  IEnumerable<ConceptMaker.Models.Ingredient>
+﻿@model  List<ConceptMaker.Models.Ingredient>
 @{
     /**/
 
-    ViewBag.Title = "ChoseInstance";
+    ViewBag.Title = "ChoseIngredients";
 }
 
 <div class="jumbotron">
     <h1>Konfigurujemy</h1>
 </div>
-<h2>część 2.. </h2>
+<h2>część 3  koniec wyss </h2>
+<h2>Pasujące elementy do wybranej instancji : </h2>
 
-@using (Html.BeginForm("ChoseInstance", "MakeConcept", FormMethod.Get))
+@using (Html.BeginForm("ChoseIngredients", "MakeConcept", FormMethod.Get))
 {
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
@@ -18,15 +19,19 @@
 <table class="table">
     @foreach (var item in Model)
     {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.ActionLink("Przejdz Dalej", "ChoseIngredients", new { id = item.Id, usedcondeptid = item.ConceptId, usedfirstinstance = item.Id })
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.BaseInstance.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SubInstance.Name)
+        </td>
+        
+        <td>
+            @Html.ActionLink("Przejdz Dalej", "ChoseIngredients", new { id = item.Id })
 
-            </td>
-        </tr>
+        </td>
+    </tr>
     }
 </table>
 
