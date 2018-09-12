@@ -10,6 +10,7 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using ConceptMaker.Models;
 using ConceptMaker.DAL;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace ConceptMaker.Controllers
 {
@@ -150,12 +151,15 @@ namespace ConceptMaker.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Register(RegisterViewModel model)
         {
+            var userManager = new UserManager<ApplicationUser>(
+                new UserStore<ApplicationUser>(new ApplicationDbContext()));
             if (ModelState.IsValid)
             {
                 var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
+                    var result2 = userManager.AddToRole(user.Id, "Client");
                     using (var db = new ConceptMakerContext())
                     {
                         db.Profiles.Add(new Models.Profile { Username = model.Email, RegisteredDate = DateTime.Now, RoleId = 2 });

@@ -11,7 +11,7 @@ using ConceptMaker.Models;
 
 namespace ConceptMaker.Controllers
 {
-   // [Authorize(Roles = "Client")]
+   [Authorize(Roles = "Client, Admin")]
     public class MakeConceptController : Controller
 
     {
@@ -66,6 +66,17 @@ namespace ConceptMaker.Controllers
 
 
             return View(lista);
+        }
+        [Authorize(Roles ="Client")]
+        [HttpGet]
+        public ActionResult SendMail(int? id)
+        {
+            var ingredient = db.Ingredients.SingleOrDefault(i => i.Id == id);
+            string nazwa = ingredient.BaseInstance.Name;
+
+
+
+            return RedirectToAction("Index");
         }
     }
 }
