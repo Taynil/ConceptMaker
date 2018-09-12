@@ -207,6 +207,7 @@
     <Compile Include="Controllers\IngredientsController.cs" />
     <Compile Include="Controllers\InstancesController.cs" />
     <Compile Include="Controllers\LawsController.cs" />
+    <Compile Include="Controllers\MakeConceptController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\ProfilesController.cs" />
     <Compile Include="Controllers\RolesController.cs" />
@@ -322,6 +323,10 @@
     <Content Include="Views\Roles\Details.cshtml" />
     <Content Include="Views\Roles\Edit.cshtml" />
     <Content Include="Views\Roles\Index.cshtml" />
+    <Content Include="Views\MakeConcept\CreateConcept.cshtml" />
+    <Content Include="Views\MakeConcept\Index.cshtml" />
+    <Content Include="Views\MakeConcept\ChoseInstance.cshtml" />
+    <Content Include="Views\MakeConcept\ChoseIngredients.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

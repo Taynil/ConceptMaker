@@ -1,0 +1,40 @@
+﻿@model IEnumerable<ConceptMaker.Models.Concept>
+
+
+@{
+    /**/
+
+    ViewBag.Title = "Konfiguracja";
+}
+
+<div class="jumbotron">
+    <h1>Konfigurujemy </h1>
+
+
+</div>
+<h2>część 1.. </h2>
+
+<h4>Wybierz pojecie poczatkowe od którego chcesz zacząć: </h4>
+<table class="table">
+    <tr>
+        <th>
+            @Html.ActionLink("Nazwa", "Index", new { sortOrder = ViewBag.NameSortParm })
+        </th>
+
+
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.ActionLink("Przejdz Dalej", "ChoseInstance", new { id = item.Id })
+
+            </td>
+        </tr>
+    }
+
+</table>
