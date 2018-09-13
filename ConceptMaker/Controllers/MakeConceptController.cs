@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
+using System.Net.Mail;
 using System.Web;
 using System.Web.Mvc;
 using ConceptMaker.DAL;
@@ -67,13 +69,31 @@ namespace ConceptMaker.Controllers
 
             return View(lista);
         }
-        [Authorize(Roles ="Client")]
+        [Authorize(Roles = "Client,Admin")]
         [HttpGet]
         public ActionResult SendMail(int? id)
         {
             var ingredient = db.Ingredients.SingleOrDefault(i => i.Id == id);
             string nazwa = ingredient.BaseInstance.Name;
 
+            
+            var message = new System.Net.Mail.MailMessage(ConfigurationManager.AppSettings["sender"], "programowaniezaawansowane1@gmail.com")
+
+            {
+                Subject = "Nowe wyszukanie!",
+                Body = "Wyszukano konfigurację dla: " + nazwa
+            };
+
+            var smtpClient = new System.Net.Mail.SmtpClient
+            {
+                Host = ConfigurationManager.AppSettings["smtpHost"],
+                Credentials = new System.Net.NetworkCredential(
+                    ConfigurationManager.AppSettings["sender"],
+                    ConfigurationManager.AppSettings["passwd"]),
+                EnableSsl = true
+            };
+            smtpClient.Send(message);
+            
 
 
             return RedirectToAction("Index");

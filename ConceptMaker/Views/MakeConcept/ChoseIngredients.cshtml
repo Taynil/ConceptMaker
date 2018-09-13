@@ -8,8 +8,8 @@
 <div class="jumbotron">
     <h1>Konfigurujemy</h1>
 </div>
-<h2>część 3  koniec wyss </h2>
-<h2>Pasujące elementy do wybranej instancji : </h2>
+<h2>część 3  ostatnia </h2>
+<h2> Elementy które pasują do wybranej instancji : </h2>
 
 @using (Html.BeginForm("ChoseIngredients", "MakeConcept", FormMethod.Get))
 {
@@ -28,7 +28,7 @@
         </td>
         
         <td>
-            @Html.ActionLink("Przejdz Dalej", "SendMail", new { id = item.Id })
+            @Html.ActionLink("Powrót do ponownego wyboru ->", "SendMail",new { id = item.Id })
 
         </td>
     </tr>
