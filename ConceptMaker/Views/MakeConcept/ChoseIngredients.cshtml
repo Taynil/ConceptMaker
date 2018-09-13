@@ -1,4 +1,5 @@
-﻿@model  List<ConceptMaker.Models.Ingredient>
+﻿@model  PagedList.IPagedList<ConceptMaker.Models.Ingredient>
+@using PagedList.Mvc;
 @{
     /**/
 
@@ -14,35 +15,59 @@
 @using (Html.BeginForm("ChoseIngredients", "MakeConcept", FormMethod.Get))
 {
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <p>
+        Szukaj po nazwie: @Html.TextBox("SearchString", ViewBag.CurrentFilter as string)
+        <input type="submit" value="Szukaj" />
+    </p>
 
 }
-c
-{
-    <h2>Niestety nie odnaleziono nic pasującego do tej instancji :( </h2>
-    @Html.ActionLink("Powrót do ponownego wyboru ->", "Index")
+@if (!Model.Any()){ 
+<h2>Niestety nie odnaleziono nic pasującego do tej instancji :( </h2>
+@Html.ActionLink("Powrót do ponownego wyboru ->", "Index")
 }
 <table class="table">
 
-    @foreach (var item in Model)
-    {
+    <table class="table">
         <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.BaseInstance.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.SubInstance.Name)
-            </td>
+            <th>
 
-            <td>
-                @Html.ActionLink("Powrót do ponownego wyboru ->", "SendMail", new { id = item.Id })
+                @Html.ActionLink("Naza instancji bazowej", "ChoseIngredients", new { sortOrder = ViewBag.NameSortParm, currentFilter = ViewBag.CurrentFilter })
+            </th>
+            <th>
+               
 
-            </td>
+            </th>
+            <th>
+                Wybór akcji:
+            </th>
+            <th></th>
         </tr>
-    }
-</table>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BaseInstance.Name)
+
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SubInstance.Name)
+                </td>
+
+                <td>
+                    @Html.ActionLink("Powrót do ponownego wyboru ->", "SendMail", new { id = item.Id })
+
+                </td>
+            </tr>
+        }
+    </table>
+
+    Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+    @Html.PagedListPager(Model, page => Url.Action("Index",
+        new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
 
 
 
 
-    
+
 

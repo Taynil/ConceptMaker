@@ -10,6 +10,7 @@ using System.Web;
 using System.Web.Mvc;
 using ConceptMaker.DAL;
 using ConceptMaker.Models;
+using PagedList;
 
 namespace ConceptMaker.Controllers
 {
@@ -56,8 +57,27 @@ namespace ConceptMaker.Controllers
 
 
         [HttpGet]
-        public ActionResult ChoseIngredients(int? id, int? idconceptu)
+        public ActionResult ChoseIngredients(int? id, int? idconceptu, string sortOrder, string currentFilter, string searchString, int? page)
         {
+
+            ViewBag.CurrentSort = sortOrder;
+            ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "name_desc1" : "";
+
+
+
+            if (searchString != null)
+            {
+                page = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
+            }
+
+            ViewBag.CurrentFilter = searchString;
+
+            
+
             List<Ingredient> lista = new List<Ingredient>();
             var IngredientList = db.Ingredients.Where(r => r.BaseInstanceId == id).ToList();
             foreach (var item in IngredientList)
@@ -65,7 +85,30 @@ namespace ConceptMaker.Controllers
                 var list = db.Ingredients.Where(i => i.SubInstanceId == item.SubInstanceId && i.BaseInstance.ConceptId != idconceptu).ToList();
                 lista.AddRange(list);
             }
-            
+
+            var ingredients = from s in lista select s;
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                ingredients = ingredients.Where(s => s.BaseInstance.Name.Contains(searchString)
+                 || s.SubInstance.Name.Contains(searchString));
+            }
+            switch (sortOrder)
+            {
+                case "name_desc1":
+                    ingredients = ingredients.OrderByDescending(s => s.BaseInstance.Name);
+                    break;
+                
+                default:
+                    ingredients = ingredients.OrderBy(s => s.BaseInstance.Name);
+                    break;
+            }
+            int pageSize = 8;
+            int pageNumber = (page ?? 1);
+            return View(ingredients.ToPagedList(pageNumber, pageSize));
+
+
+
             return View(lista);
         }
         [Authorize(Roles = "Client,Admin")]
