@@ -56,7 +56,7 @@ namespace ConceptMaker.Controllers
             }
             int pageSize = 8;
             int pageNumber = (page ?? 1);
-            return View(instances.OrderBy(i =>i.Name).ToPagedList(pageNumber, pageSize));
+            return View(instances.ToPagedList(pageNumber, pageSize));
             //return View(instances.ToList());
         }
 

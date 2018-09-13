@@ -16,27 +16,33 @@
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
 }
+c
+{
+    <h2>Niestety nie odnaleziono nic pasującego do tej instancji :( </h2>
+    @Html.ActionLink("Powrót do ponownego wyboru ->", "Index")
+}
 <table class="table">
+
     @foreach (var item in Model)
     {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.BaseInstance.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.SubInstance.Name)
-        </td>
-        
-        <td>
-            @Html.ActionLink("Powrót do ponownego wyboru ->", "SendMail",new { id = item.Id })
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.BaseInstance.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SubInstance.Name)
+            </td>
 
-        </td>
-    </tr>
+            <td>
+                @Html.ActionLink("Powrót do ponownego wyboru ->", "SendMail", new { id = item.Id })
+
+            </td>
+        </tr>
     }
 </table>
 
 
 
 
-    </dl>
+    
 

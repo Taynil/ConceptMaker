@@ -65,8 +65,7 @@ namespace ConceptMaker.Controllers
                 var list = db.Ingredients.Where(i => i.SubInstanceId == item.SubInstanceId && i.BaseInstance.ConceptId != idconceptu).ToList();
                 lista.AddRange(list);
             }
-
-
+            
             return View(lista);
         }
         [Authorize(Roles = "Client,Admin")]
