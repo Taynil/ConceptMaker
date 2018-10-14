@@ -58,7 +58,7 @@ namespace ConceptMaker.Controllers
         [Authorize]
         public ActionResult Create()
         {
-            ViewBag.CategoryId = new SelectList(db.Concepts, "Id", "Name");
+            ViewBag.CategoryId = new SelectList(db.Categories, "Id", "Name");
             return View();
         }
 
@@ -76,7 +76,7 @@ namespace ConceptMaker.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.CategoryId = new SelectList(db.Concepts, "Id", "Name", concept.CategorytId);
+            ViewBag.CategoryId = new SelectList(db.Categories, "Id", "Name", concept.CategoryId);
             return View(concept);
         }
 
@@ -92,7 +92,7 @@ namespace ConceptMaker.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.CategoryId = new SelectList(db.Concepts, "Id", "Name", concept.CategorytId);
+            ViewBag.CategoryId = new SelectList(db.Categories, "Id", "Name", concept.CategoryId);
             return View(concept);
         }
         [AllowAnonymous]
@@ -115,7 +115,7 @@ namespace ConceptMaker.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.CategoryId = new SelectList(db.Concepts, "Id", "Name", concept.CategorytId);
+            ViewBag.CategoryId = new SelectList(db.Categories, "Id", "Name", concept.CategoryId);
             return View(concept);
            
         }

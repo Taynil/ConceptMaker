@@ -69,11 +69,11 @@ namespace ConceptMaker.DAL
 
             var concepts = new List<Concept> //ok
         {
-        new Concept { Name = "Plyta_Glowna", CategorytId =1 },
-        new Concept { Name = "Gniazdo_Procesora", CategorytId =1 },
-        new Concept { Name = "Procesor", CategorytId =1},
-        new Concept { Name = "Typ_Ramu DDR_" , CategorytId =1},
-        new Concept { Name = "Pamiec_RAM", CategorytId =1 }
+        new Concept { Name = "Plyta_Glowna", CategoryId =1 },
+        new Concept { Name = "Gniazdo_Procesora", CategoryId =1 },
+        new Concept { Name = "Procesor", CategoryId =1},
+        new Concept { Name = "Typ_Ramu DDR_" , CategoryId =1},
+        new Concept { Name = "Pamiec_RAM", CategoryId =1 }
        };
             concepts.ForEach(s => context.Concepts.Add(s));
             context.SaveChanges();

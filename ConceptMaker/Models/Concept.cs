@@ -16,7 +16,7 @@ namespace ConceptMaker.Models
         [Display(Name = "Nazwa Pojecia")]
         public string Name { get; set; }
         [DisplayName("Id kategorii")]
-        public int CategorytId { get; set; }
+        public int CategoryId { get; set; }
 
         public virtual Category Category{ get; set; }
 
