@@ -11,137 +11,107 @@ using ConceptMaker.Models;
 
 namespace ConceptMaker.Controllers
 {
-    [Authorize(Roles = "Admin")]
-    public class ConceptsController : Controller
+    public class CategoriesController : Controller
     {
         private ConceptMakerContext db = new ConceptMakerContext();
 
-        // GET: Concepts
-        
-        public ActionResult Index(string sortOrder)
+        // GET: Categories
+        public ActionResult Index()
         {
-
-            ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
-            ViewBag.DateSortParm = sortOrder == "Date" ? "date_desc" : "Date";
-            var concept = from s in db.Concepts
-                           select s;
-            switch (sortOrder)
-            {
-                case "name_desc":
-                    concept = concept.OrderByDescending(s => s.Name);
-                    break;
-           
-                default:
-                    concept = concept.OrderBy(s => s.Name);
-                    break;
-            }
-            return View(concept.ToList());
+            return View(db.Categories.ToList());
         }
 
-        // GET: Concepts/Details/5
-        [Authorize(Roles = "Admin")]
+        // GET: Categories/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Concept concept = db.Concepts.Find(id);
-            if (concept == null)
+            Category category = db.Categories.Find(id);
+            if (category == null)
             {
                 return HttpNotFound();
             }
-            return View(concept);
+            return View(category);
         }
 
-        // GET: Concepts/Create
-        [Authorize]
+        // GET: Categories/Create
         public ActionResult Create()
         {
-            ViewBag.CategoryId = new SelectList(db.Concepts, "Id", "Name");
             return View();
         }
 
-        // POST: Concepts/Create
+        // POST: Categories/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Name")] Concept concept)
+        public ActionResult Create([Bind(Include = "Id,Name,Description")] Category category)
         {
             if (ModelState.IsValid)
             {
-                db.Concepts.Add(concept);
+                db.Categories.Add(category);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.CategoryId = new SelectList(db.Concepts, "Id", "Name", concept.CategorytId);
-            return View(concept);
+            return View(category);
         }
 
-        // GET: Concepts/Edit/5
+        // GET: Categories/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Concept concept = db.Concepts.Find(id);
-            if (concept == null)
+            Category category = db.Categories.Find(id);
+            if (category == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.CategoryId = new SelectList(db.Concepts, "Id", "Name", concept.CategorytId);
-            return View(concept);
-        }
-        [AllowAnonymous]
-        public ContentResult GetCount()
-        {
-            var count = db.Concepts.Count();
-            return Content(count.ToString());
+            return View(category);
         }
 
-        // POST: Concepts/Edit/5
+        // POST: Categories/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Name")] Concept concept)
+        public ActionResult Edit([Bind(Include = "Id,Name,Description")] Category category)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(concept).State = EntityState.Modified;
+                db.Entry(category).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.CategoryId = new SelectList(db.Concepts, "Id", "Name", concept.CategorytId);
-            return View(concept);
-           
+            return View(category);
         }
 
-        // GET: Concepts/Delete/5
+        // GET: Categories/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Concept concept = db.Concepts.Find(id);
-            if (concept == null)
+            Category category = db.Categories.Find(id);
+            if (category == null)
             {
                 return HttpNotFound();
             }
-            return View(concept);
+            return View(category);
         }
 
-        // POST: Concepts/Delete/5
+        // POST: Categories/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Concept concept = db.Concepts.Find(id);
-            db.Concepts.Remove(concept);
+            Category category = db.Categories.Find(id);
+            db.Categories.Remove(category);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

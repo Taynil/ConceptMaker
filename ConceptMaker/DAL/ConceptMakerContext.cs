@@ -19,11 +19,12 @@ namespace ConceptMaker.DAL
 
         public virtual DbSet<Instance> Instances { get; set; }
         public virtual DbSet<Component> Components { get; set; }
-        public virtual  DbSet<Concept> Concepts { get; set; }
+        public virtual DbSet<Concept> Concepts { get; set; }
         public virtual DbSet<Law> Laws { get; set; }
         public virtual DbSet<Ingredient> Ingredients { get; set; }
         public virtual DbSet<Profile> Profiles { get; set; }
         public virtual DbSet<Role> Roles { get; set; }
+        public virtual DbSet<Category> Categories { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
 

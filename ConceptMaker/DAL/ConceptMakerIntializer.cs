@@ -9,7 +9,7 @@ using System.Web;
 
 namespace ConceptMaker.DAL
 {
-    public class ConceptMakerIntializer : DropCreateDatabaseIfModelChanges<ConceptMakerContext>
+    public class ConceptMakerIntializer :DropCreateDatabaseIfModelChanges<ConceptMakerContext>
     {
         protected override void Seed(ConceptMakerContext context)
         {
@@ -58,21 +58,29 @@ namespace ConceptMaker.DAL
 
             };
 
+            var categories = new List<Category> //ok
+        {
+        new Category { Name = "Komputery" , Description = "Konfigurator kompa"},
+        new Category { Name = "Mlotki" , Description = "Konfigurator mlotka"},
+       
+       };
+            categories.ForEach(s => context.Categories.Add(s));
+            context.SaveChanges();
 
             var concepts = new List<Concept> //ok
         {
-        new Concept { Name = "Plyta_Glowna" },
-        new Concept { Name = "Gniazdo_Procesora" },
-        new Concept { Name = "Procesor"},
-        new Concept { Name = "Typ_Ramu DDR_" },
-        new Concept { Name = "Pamiec_RAM" }
+        new Concept { Name = "Plyta_Glowna", CategorytId =1 },
+        new Concept { Name = "Gniazdo_Procesora", CategorytId =1 },
+        new Concept { Name = "Procesor", CategorytId =1},
+        new Concept { Name = "Typ_Ramu DDR_" , CategorytId =1},
+        new Concept { Name = "Pamiec_RAM", CategorytId =1 }
        };
             concepts.ForEach(s => context.Concepts.Add(s));
             context.SaveChanges();
 
             var components = new List<Component> //ok
         {
-         new Component{ ConceptId= 1,  SubConceptId=2, Required=true }, //plyta > gniazdoproca
+         new Component{ ConceptId= 1,  SubConceptId=2, Required=true  }, //plyta > gniazdoproca
          new Component{ ConceptId= 1,  SubConceptId=4, Required=true }, //plyta > ram
          new Component{ ConceptId= 3,  SubConceptId=2, Required=true }, // procseor > gniazdo
          new Component{ ConceptId= 5,  SubConceptId=4, Required=true } // Ram > typ pamieci
