@@ -24,25 +24,29 @@
         <dd>
             @Html.DisplayFor(model => model.CategoryId)
         </dd>
-        <!--
-        <dd>
-            <table class="table">
+        
+
+            
+
+            
+    <dd>
+        <table class="table">
+            <tr>
+                <th>Pojecie</th>
+
+            </tr>
+            @foreach (var item in Model.Components)
+            {
                 <tr>
-                    <th>Pojecie</th>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Concept.Name)
+                    </td>
 
                 </tr>
-                @foreach (var item in Model.Components)
-                {
-                    <tr>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Concept.Name)
-                        </td>
-
-                    </tr>
-                }
-            </table>
-        </dd>-->
-    </dl>
+            }
+        </table>
+    </dd>
+</dl>
 </div>
 <p>
     @Html.ActionLink("Edytuj", "Edit", new { id = Model.Id }) |

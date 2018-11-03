@@ -9,7 +9,7 @@ using System.Web;
 
 namespace ConceptMaker.DAL
 {
-    public class ConceptMakerIntializer :DropCreateDatabaseIfModelChanges<ConceptMakerContext>
+    public class ConceptMakerIntializer :DropCreateDatabaseAlways<ConceptMakerContext>
     {
         protected override void Seed(ConceptMakerContext context)
         {
@@ -60,8 +60,8 @@ namespace ConceptMaker.DAL
 
             var categories = new List<Category> //ok
         {
-        new Category { Name = "Komputery" , Description = "Konfigurator kompa"},
-        new Category { Name = "Mlotki" , Description = "Konfigurator mlotka"},
+        new Category {Id =1, Name = "Komputery" , Description = "Konfigurator kompa"},
+        new Category {Id =2, Name = "Mlotki" , Description = "Konfigurator mlotka"},
        
        };
             categories.ForEach(s => context.Categories.Add(s));

@@ -134,7 +134,9 @@ namespace ConceptMaker.Controllers
                     ConfigurationManager.AppSettings["passwd"]),
                 EnableSsl = true
             };
-            smtpClient.Send(message);
+            //google nie pozwala sie zalogowac
+            //wiec chwilowo nie da sie wyslac @ 
+            //smtpClient.Send(message);
             
 
 

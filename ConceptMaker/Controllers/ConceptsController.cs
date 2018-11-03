@@ -51,6 +51,8 @@ namespace ConceptMaker.Controllers
             {
                 return HttpNotFound();
             }
+            ViewBag.CategoryId = new SelectList(db.Categories, "Id", "Name", concept.CategoryId);
+            
             return View(concept);
         }
 
@@ -67,7 +69,7 @@ namespace ConceptMaker.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Name")] Concept concept)
+        public ActionResult Create([Bind(Include = "Id,Name,CategoryId")] Concept concept)
         {
             if (ModelState.IsValid)
             {
@@ -75,8 +77,8 @@ namespace ConceptMaker.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-
             ViewBag.CategoryId = new SelectList(db.Categories, "Id", "Name", concept.CategoryId);
+            //ViewBag.CategoryId = new SelectList(db.Categories, "Id", "Name", concept.CategoryId);
             return View(concept);
         }
 
@@ -107,7 +109,7 @@ namespace ConceptMaker.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Name")] Concept concept)
+        public ActionResult Edit([Bind(Include = "Id,Name,CategoryId")] Concept concept)
         {
             if (ModelState.IsValid)
             {
