@@ -1,10 +1,11 @@
-﻿@model IEnumerable<ConceptMaker.Models.Concept>
-
+﻿@model IEnumerable<ConceptMaker.Models.Category>
 
 @{
-    /**/
+                /**/
 
-    ViewBag.Title = "Konfiguracja";
+                /**/  /**/
+
+                ViewBag.Title = "Konfiguracja";
 }
 
 <div class="jumbotron">
@@ -18,7 +19,7 @@
 <table class="table">
     <tr>
         <th>
-            @Html.ActionLink("Nazwa", "Index", new { sortOrder = ViewBag.NameSortParm })
+            @Html.ActionLink("Nazwa Kategorii", "Index", new { sortOrder = ViewBag.NameSortParm })
         </th>
 
 
@@ -31,7 +32,7 @@
                 @Html.DisplayFor(modelItem => item.Name)
             </td>
             <td>
-                @Html.ActionLink("Przejdz Dalej", "ChoseInstance", new { id = item.Id })
+                @Html.ActionLink("Przejdz Dalej", "ChoseCategory", new { id = item.Id })
 
             </td>
         </tr>

@@ -22,29 +22,62 @@ namespace ConceptMaker.Controllers
         private ConceptMakerContext db = new ConceptMakerContext();
         
 
+        ////start index wybor pojecia startowego
+        //public ActionResult Index(string sortOrder)
+        //{
+
+        //    ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+        //    ViewBag.DateSortParm = sortOrder == "Date" ? "date_desc" : "Date";
+        //    var concept = from s in db.Concepts
+        //                  select s;
+        //    switch (sortOrder)
+        //    {
+        //        case "name_desc":
+        //            concept = concept.OrderByDescending(s => s.Name);
+        //            break;
+
+        //        default:
+        //            concept = concept.OrderBy(s => s.Name);
+        //            break;
+        //    }
+        //    return View(concept.ToList());
+        //}
+
         //start index wybor pojecia startowego
         public ActionResult Index(string sortOrder)
         {
 
             ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
             ViewBag.DateSortParm = sortOrder == "Date" ? "date_desc" : "Date";
-            var concept = from s in db.Concepts
+            var category = from s in db.Categories
                           select s;
             switch (sortOrder)
             {
                 case "name_desc":
-                    concept = concept.OrderByDescending(s => s.Name);
+                    category = category.OrderByDescending(s => s.Name);
                     break;
 
                 default:
-                    concept = concept.OrderBy(s => s.Name);
+                    category = category.OrderBy(s => s.Name);
                     break;
             }
-            return View(concept.ToList());
+            return View(category.ToList());
         }
 
-       
-      
+        [HttpGet]
+        public ActionResult ChoseCategory(int? id)
+        {
+           // List<Ingredient> lista = new List<Ingredient>();
+           // var IngredientList = db.Ingredients.Where(r => r.BaseInstanceId == id).ToList();
+
+            //var InstancesList = db.Instances.Where(r => r.ConceptId == id).ToList();
+            var ConceptList = db.Concepts.Where(r => r.CategoryId == id).ToList();
+                
+            // return View(InstancesList);
+            return View(ConceptList);
+
+        }
+
         [HttpGet]
         public ActionResult ChoseInstance(int? id)
         {
@@ -109,7 +142,7 @@ namespace ConceptMaker.Controllers
 
 
 
-            return View(lista);
+            //return View(lista);
         }
         [Authorize(Roles = "Client,Admin")]
         [HttpGet]
@@ -134,7 +167,7 @@ namespace ConceptMaker.Controllers
                     ConfigurationManager.AppSettings["passwd"]),
                 EnableSsl = true
             };
-            smtpClient.Send(message);
+            //smtpClient.Send(message);
             
 
 

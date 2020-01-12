@@ -12,13 +12,13 @@ using PagedList;
 
 namespace ConceptMaker.Controllers
 {
-    [Authorize(Roles = "Admin")]
+    [Authorize(Roles = "Client, Admin")]
     public class InstancesController : Controller
     {
         private ConceptMakerContext db = new ConceptMakerContext();
 
         // GET: Instances
-        
+        [Authorize(Roles = "Client, Admin")]
         public ActionResult Index(string sortOrder, string currentFilter, string searchString, int? page)
         {
             
@@ -61,7 +61,7 @@ namespace ConceptMaker.Controllers
         }
 
         // GET: Instances/Details/5
-       
+        [Authorize(Roles = "Admin, Client")]
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -77,7 +77,7 @@ namespace ConceptMaker.Controllers
         }
 
         // GET: Instances/Create
-        
+        [Authorize(Roles = "Admin")]
         public ActionResult Create()
         {
             ViewBag.ConceptId = new SelectList(db.Concepts, "Id", "Name");
@@ -111,7 +111,7 @@ namespace ConceptMaker.Controllers
         }
 
         // GET: Instances/Edit/5
-        
+        [Authorize(Roles = "Admin")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -130,6 +130,7 @@ namespace ConceptMaker.Controllers
         // POST: Instances/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "Id,ConceptId,Name,Description")] Instance instance)
@@ -152,6 +153,7 @@ namespace ConceptMaker.Controllers
         }
 
         // GET: Instances/Delete/5
+        [Authorize(Roles = "Admin")]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -167,6 +169,7 @@ namespace ConceptMaker.Controllers
         }
 
         // POST: Instances/Delete/5
+        [Authorize(Roles = "Admin")]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)

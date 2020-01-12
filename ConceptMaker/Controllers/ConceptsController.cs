@@ -51,6 +51,8 @@ namespace ConceptMaker.Controllers
             {
                 return HttpNotFound();
             }
+            ViewBag.CategoryId = new SelectList(db.Categories, "Id", "Name", concept.CategoryId);
+            
             return View(concept);
         }
 

@@ -37,6 +37,16 @@
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edytuj", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Powrót do listy", "Index")
+    @if (User.IsInRole("Admin"))
+    {
+        @Html.ActionLink("Edytuj", "Edit", new { id = Model.Id })
+        @Html.ActionLink("Powrót do listy", "Index")
+        @Html.ActionLink("Powrót do Koszyka", "Index", "ShoppingCart");
+    }
+    @if (User.IsInRole("Client"))
+    {
+
+        @Html.ActionLink("Powrót do Koszyka", "Index", "ShoppingCart");
+    }
+
 </p>

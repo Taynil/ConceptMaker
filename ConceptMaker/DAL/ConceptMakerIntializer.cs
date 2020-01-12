@@ -1,4 +1,4 @@
-﻿using ConceptMaker.Models;
+﻿ using ConceptMaker.Models;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using System;
@@ -9,7 +9,10 @@ using System.Web;
 
 namespace ConceptMaker.DAL
 {
-    public class ConceptMakerIntializer :DropCreateDatabaseIfModelChanges<ConceptMakerContext>
+    // public class ConceptMakerIntializer : DropCreateDatabaseIfModelChanges<ConceptMakerContext>
+    //public class ConceptMakerIntializer : DropCreateDatabaseAlways <ConceptMakerContext>
+    public class ConceptMakerIntializer : DropCreateDatabaseIfModelChanges<ConceptMakerContext>
+    
     {
         protected override void Seed(ConceptMakerContext context)
         {

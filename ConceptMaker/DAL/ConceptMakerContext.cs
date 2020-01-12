@@ -25,6 +25,7 @@ namespace ConceptMaker.DAL
         public virtual DbSet<Profile> Profiles { get; set; }
         public virtual DbSet<Role> Roles { get; set; }
         public virtual DbSet<Category> Categories { get; set; }
+        public virtual DbSet<CartItem> ShoppingCartItems { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
 

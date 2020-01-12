@@ -28,6 +28,7 @@
                     @if (User.IsInRole("Admin") || User.IsInRole("Client"))
                     {
                         <li>@Html.ActionLink("Konfigurator", "Index", "MakeConcept")</li>
+                        <li>@Html.ActionLink("Koszyk konfiguracji", "Index", "ShoppingCart")</li>
                     }
 
 

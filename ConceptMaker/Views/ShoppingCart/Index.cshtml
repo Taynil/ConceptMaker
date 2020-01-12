@@ -1,0 +1,75 @@
+﻿@{
+    ViewBag.Title = "Shopping Cart";
+}
+@model ConceptMaker.ViewModels.ShoppingCartViewModel
+
+
+<script src="/Scripts/jquery-3.3.1.min.js"
+        type="text/javascript"></script>
+<script type="text/javascript">
+    $(function () {
+        // Document.ready -> link up remove event handler
+        $(".RemoveLink").click(function () {
+            // Get the id from the link
+            var recordToDelete = $(this).attr("data-id");
+            if (recordToDelete != '') {
+                // Perform the ajax post
+                $.post("/ShoppingCart/RemoveFromCart", { "id": recordToDelete },
+                    function (data) {
+                        // Successful requests get here
+                        // Update the page elements
+                        if (data.ItemCount == 0) {
+                            $('#row-' + data.DeleteId).fadeOut('slow');
+                            
+                        } else {
+                            $('#item-count-' + data.DeleteId).text(data.ItemCount);
+                        }
+                        
+                       
+                        setTimeout(location.reload.bind(location), 2000);
+                        
+                        $('#update-message').text(data.Message);
+                        var text = data.Message;
+                        alert(text);
+                    });
+            }
+        });
+    });
+</script>
+<h3>
+    <em>Powrot do konfiguracji : </em>
+</h3>
+@*<p class="button">
+
+        @Html.ActionLink("Checkout
+    >>", "AddressAndPayment", "Checkout")
+
+    </p>*@
+<div id="update-message">
+</div>
+<table>
+    <tr>
+        <th>
+            Nazwa pojecia
+        </th>
+
+        <th></th>
+    </tr>
+    @foreach (var item in
+Model.CartItems)
+    {
+        <tr id="row-@item.ItemId">
+            <td>
+                @Html.ActionLink(item.Instance.Name,
+"Details", "Instances", new { id = item.InstanceId }, null)
+            </td>
+
+            <td>
+                <a href="#" class="RemoveLink" data-id="@item.ItemId">
+                    Remove     from cart
+                </a>
+            </td>
+        </tr>
+    }
+    ,
+</table>

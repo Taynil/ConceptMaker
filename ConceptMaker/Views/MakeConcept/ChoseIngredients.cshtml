@@ -9,7 +9,7 @@
 <div class="jumbotron">
     <h1>Konfigurujemy</h1>
 </div>
-<h2>część 3  ostatnia </h2>
+<h2>część 4  ostatnia </h2>
 <h2> Elementy które pasują do wybranej instancji : </h2>
 
 @using (Html.BeginForm("ChoseIngredients", "MakeConcept", FormMethod.Get))
@@ -44,20 +44,26 @@
         </tr>
         @foreach (var item in Model)
         {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.BaseInstance.Name)
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.BaseInstance.Name)
 
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.SubInstance.Name)
-                </td>
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SubInstance.Name)
+            </td>
 
-                <td>
-                    @Html.ActionLink("Powrót do ponownego wyboru ->", "SendMail", new { id = item.Id })
+            <td>
+                @Html.ActionLink("Powrót do ponownego wyboru ->", "", new { id = item.Id })
 
-                </td>
-            </tr>
+            </td>
+            <td>
+                <p class="button">
+                    @Html.ActionLink("Dodaj do koszyka", "AddToCart",
+                    "ShoppingCart", new { id = item.BaseInstanceId }, "")
+                </p>
+            </td>
+        </tr>
         }
     </table>
 

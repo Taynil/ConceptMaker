@@ -21,6 +21,7 @@ namespace ConceptMaker.Models
 
         public virtual ICollection<Ingredient> Ingredients { get; set; } //czy do pojecia? do skladowych tak
         public virtual Concept Concept { get; set; }
+        //public int InstanceID { get; internal set; }
 
         /*
         public int ID { get; set; }
