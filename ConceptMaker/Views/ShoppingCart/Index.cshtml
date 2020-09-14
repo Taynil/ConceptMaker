@@ -37,39 +37,61 @@
     });
 </script>
 <h3>
-    <em>Powrot do konfiguracji : </em>
+    <img src="~/Photos/configurationbasket.png" width="90" height="90" allign="left" />
+    <em>Twój koszyk: </em>
+
 </h3>
-@*<p class="button">
+<p class="button">
 
-        @Html.ActionLink("Checkout
-    >>", "AddressAndPayment", "Checkout")
+    @Html.ActionLink("Powrót do konfiguracji ", "Index", "MakeConcept")
 
-    </p>*@
+    </p>
 <div id="update-message">
 </div>
-<table>
-    <tr>
-        <th>
-            Nazwa pojecia
-        </th>
+<table class="table table-striped table-hover ">
+    <thead>
+        <tr>
+            <th>
+                Kategoria
+            </th>
 
-        <th></th>
-    </tr>
+            <th>
+                Typ
+            </th>
+            <th>
+                Nazwa pojecia
+            </th>
+
+            <th>
+                Usun z koszyka
+            </th>
+        </tr>
+    </thead>
     @foreach (var item in
 Model.CartItems)
     {
+        
+        
         <tr id="row-@item.ItemId">
             <td>
+
+                @Html.DisplayFor(modelItem => item.Instance.Concept.Category.Name)
+            </td>
+            <td>
+             
+                @Html.DisplayFor(modelItem => item.Instance.Concept.Name)
+            </td>
+            <td>
                 @Html.ActionLink(item.Instance.Name,
-"Details", "Instances", new { id = item.InstanceId }, null)
+"Details", "Instances", new { id = item.InstanceId }, null) <- kliknij aby zobaczyc szczegoly
             </td>
 
             <td>
                 <a href="#" class="RemoveLink" data-id="@item.ItemId">
-                    Remove     from cart
+                    Usun z koszyka
                 </a>
             </td>
         </tr>
     }
-    ,
+
 </table>

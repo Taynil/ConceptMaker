@@ -52,7 +52,7 @@ namespace ConceptMaker.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,ConceptId,SubConceptId,Required")] Component component)
+        public ActionResult Create([Bind(Include = "Id,ComponentName,ConceptId,SubConceptId,Required")] Component component)
         {
             if (ModelState.IsValid)
             {
@@ -88,7 +88,7 @@ namespace ConceptMaker.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,ConceptId,SubConceptId,Required")] Component component)
+        public ActionResult Edit([Bind(Include = "Id,ComponentName,ConceptId,SubConceptId,Required")] Component component)
         {
             if (ModelState.IsValid)
             {

@@ -1,46 +1,56 @@
 ﻿@model  PagedList.IPagedList<ConceptMaker.Models.Ingredient>
-@using PagedList.Mvc;
-@{
-    /**/
+    @using PagedList.Mvc;
+    @{
+        /**/
 
-    ViewBag.Title = "ChoseIngredients";
-}
+        ViewBag.Title = "ChoseIngredients";
+    }
 
-<div class="jumbotron">
-    <h1>Konfigurujemy</h1>
-</div>
-<h2>część 4  ostatnia </h2>
-<h2> Elementy które pasują do wybranej instancji : </h2>
 
-@using (Html.BeginForm("ChoseIngredients", "MakeConcept", FormMethod.Get))
-{
-    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-    <p>
-        Szukaj po nazwie: @Html.TextBox("SearchString", ViewBag.CurrentFilter as string)
-        <input type="submit" value="Szukaj" />
-    </p>
 
-}
-@if (!Model.Any()){ 
-<h2>Niestety nie odnaleziono nic pasującego do tej instancji :( </h2>
-@Html.ActionLink("Powrót do ponownego wyboru ->", "Index")
-}
-<table class="table">
 
-    <table class="table">
+    @if (!Model.Any())
+    {
+
+        <h2>  <img src="~/Photos/configurefail.png" width="90" height="90" allign="left" /> Niestety nie odnaleziono nic pasującego do tej instancji :( </h2>
+
+        @Html.ActionLink("Powrót do ponownego wyboru ->", "Index")
+    }
+    else
+    {
+        <h2> Pasujace elementy: <img src="~/Photos/configuresucces.png" width="90" height="90" allign="left" />  </h2>
+        using (Html.BeginForm("ChoseIngredients", "MakeConcept", FormMethod.Get))
+        {
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <p>
+                Szukaj po nazwie: @Html.TextBox("SearchString", ViewBag.CurrentFilter as string)
+                <input type="submit" value="Szukaj" />
+            </p>
+
+        }
+    }
+
+   
+    <table class="table table-striped table-hover ">
         <tr>
             <th>
 
                 @Html.ActionLink("Naza instancji bazowej", "ChoseIngredients", new { sortOrder = ViewBag.NameSortParm, currentFilter = ViewBag.CurrentFilter })
             </th>
             <th>
-               
+               Nazwa pojecia:
 
             </th>
             <th>
-                Wybór akcji:
+                Dopasowane po:
+
             </th>
-            <th></th>
+            <th>
+                Powrót:
+            </th>
+            <th>
+                Dodać do koszyka?
+            </th>
         </tr>
         @foreach (var item in Model)
         {
@@ -50,11 +60,14 @@
 
             </td>
             <td>
+                @Html.DisplayFor(modelItem => item.BaseInstance.Concept.Name)
+            </td>
+            <td>
                 @Html.DisplayFor(modelItem => item.SubInstance.Name)
             </td>
 
             <td>
-                @Html.ActionLink("Powrót do ponownego wyboru ->", "", new { id = item.Id })
+                @Html.ActionLink("Powrót ->", "", new { id = item.Id })
 
             </td>
             <td>
@@ -66,6 +79,7 @@
         </tr>
         }
     </table>
+    
 
     Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
 

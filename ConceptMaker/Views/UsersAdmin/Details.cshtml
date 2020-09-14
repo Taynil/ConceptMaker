@@ -1,0 +1,45 @@
+﻿@model ConceptMaker.Models.ApplicationUser
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Detale</h2>
+
+<div>
+    <h4>Użytkownik</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.UserName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.UserName)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Email)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+
+    </dl>
+</div>
+<h4>Rola użytkowika</h4>
+<table class="table table-striped">
+
+    @foreach (var item in Model.Roles)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.RoleId)</td>
+        </tr>
+    }
+</table>
+
+
+
+<p>
+    @Html.ActionLink("Edycja", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Powrot do Listy", "Index")
+</p>

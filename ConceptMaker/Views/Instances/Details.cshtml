@@ -40,12 +40,16 @@
     @if (User.IsInRole("Admin"))
     {
         @Html.ActionLink("Edytuj", "Edit", new { id = Model.Id })
+        <br />
         @Html.ActionLink("Powrót do listy", "Index")
+        <br />
         @Html.ActionLink("Powrót do Koszyka", "Index", "ShoppingCart");
+        <br />
+        @Html.ActionLink("Pokaz pasujace elementy", "ChoseIngredients", "MakeConcept", new { id = Model.Id, idconceptu = Model.ConceptId }, null);
     }
     @if (User.IsInRole("Client"))
     {
-
+        <br />
         @Html.ActionLink("Powrót do Koszyka", "Index", "ShoppingCart");
     }
 

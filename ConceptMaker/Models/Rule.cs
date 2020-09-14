@@ -11,6 +11,10 @@ namespace ConceptMaker.Models
 
         public int Id { get; set; }
 
+        [DisplayName("Nazwa reguly")]
+        public String LawName { get; set; }
+
+
         [DisplayName("Id pojecia")]
         public int ConceptId { get; set; }
 

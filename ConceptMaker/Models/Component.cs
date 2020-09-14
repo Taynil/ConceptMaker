@@ -9,6 +9,8 @@ namespace ConceptMaker.Models
     public class Component //komponenty
     {
         public int Id { get; set; }
+        [DisplayName("Nazwa polaczenia")]
+        public String ComponentName { get; set; }
         [DisplayName("Id pojecia")]
         public int ConceptId { get; set; }
         [DisplayName("Id pod pojecia")]

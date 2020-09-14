@@ -30,42 +30,46 @@ namespace ConceptMaker.DAL
                 new UserStore<ApplicationUser>(new ApplicationDbContext()));
             var user1 = new ApplicationUser { UserName = "admin@gmail.com", Email = "admin@gmail.com" };
             var user2 = new ApplicationUser { UserName = "user@gmail.com", Email = "user@gmail.com" };
+            var user3 = new ApplicationUser { UserName = "user3@gmail.com", Email = "user3@gmail.com" };
             userManager.Create(user1, "Admin@123");
             userManager.Create(user2, "User@123");
+            userManager.Create(user3, "User3@123");
             roleManager.Create(new IdentityRole("Admin"));
             roleManager.Create(new IdentityRole("Client"));
 
             userManager.AddToRole(user1.Id, "Admin");
             userManager.AddToRole(user2.Id, "Client");
-            var roles = new List<Role>
-            {
-                new Role { Name = "Admin", PolishName = "Admin"},
-                new Role { Name = "Client", PolishName = "Klient"}
-            };
-            roles.ForEach(r => context.Roles.Add(r));
+            userManager.AddToRole(user3.Id, "Client");
+           
             context.SaveChanges();
-            var profiles = new List<Profile>
-            {
-                new Profile
-                {
-                    Username = "admin@gmail.com",
-                     RoleId = 1,
-                    RegisteredDate = DateTime.Now
-                },
-                new Profile
-                {
-                    Username = "user@gmail.com",
-                    RoleId = 2,
-                    RegisteredDate = DateTime.Now
-                }
-
-            };
+            //var profiles = new List<Profile>
+            //{
+            //    new Profile
+            //    {
+            //        Username = "admin@gmail.com",
+            //         RoleId = 1,
+            //        RegisteredDate = DateTime.Now
+            //    },
+            //    new Profile
+            //    {
+            //        Username = "user@gmail.com",
+            //        RoleId = 2,
+            //        RegisteredDate = DateTime.Now
+            //    },
+            //    new Profile
+            //    {
+            //        Username = "user3@gmail.com",
+            //        RoleId = 2,
+            //        RegisteredDate = DateTime.Now
+            //    }
+            //};
 
             var categories = new List<Category> //ok
         {
         new Category { Name = "Komputery" , Description = "Konfigurator kompa"},
         new Category { Name = "Mlotki" , Description = "Konfigurator mlotka"},
-       
+         new Category { Name = "test" , Description = "Konfigurator mlotka"},
+
        };
             categories.ForEach(s => context.Categories.Add(s));
             context.SaveChanges();
@@ -83,10 +87,10 @@ namespace ConceptMaker.DAL
 
             var components = new List<Component> //ok
         {
-         new Component{ ConceptId= 1,  SubConceptId=2, Required=true  }, //plyta > gniazdoproca
-         new Component{ ConceptId= 1,  SubConceptId=4, Required=true }, //plyta > ram
-         new Component{ ConceptId= 3,  SubConceptId=2, Required=true }, // procseor > gniazdo
-         new Component{ ConceptId= 5,  SubConceptId=4, Required=true } // Ram > typ pamieci
+         new Component{ ComponentName="Plyta posiada gniadoprocesora", ConceptId= 1,  SubConceptId=2, Required=true  }, //plyta > gniazdoproca
+         new Component{ ComponentName="Plyta posiada typ pamieci" ,ConceptId= 1,  SubConceptId=4, Required=true }, //plyta > ram
+         new Component{ ComponentName="Procesor posiada gniazdo", ConceptId= 3,  SubConceptId=2, Required=true }, // procseor > gniazdo
+         new Component{ ComponentName="Ram ma typ pamieci" , ConceptId= 5,  SubConceptId=4, Required=true } // Ram > typ pamieci
         };
             components.ForEach(s => context.Components.Add(s));
             context.SaveChanges();
@@ -188,7 +192,7 @@ namespace ConceptMaker.DAL
 
             var laws = new List<Law>
         {
-            new Law { ConceptId = 1, FirstComponentId = 1, SecondComponentId = 3,CommonConceptId=2  }//plytaglowna, gniazdo, gniazdo procesora procesor i plyta maja wspolne pojecie
+            new Law {LawName="wspolne pojecie plyty glowe i procesora", ConceptId = 1, FirstComponentId = 1, SecondComponentId = 3,CommonConceptId=2  }//plytaglowna, gniazdo, gniazdo procesora procesor i plyta maja wspolne pojecie
            
 
 

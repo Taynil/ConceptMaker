@@ -22,8 +22,6 @@ namespace ConceptMaker.DAL
         public virtual DbSet<Concept> Concepts { get; set; }
         public virtual DbSet<Law> Laws { get; set; }
         public virtual DbSet<Ingredient> Ingredients { get; set; }
-        public virtual DbSet<Profile> Profiles { get; set; }
-        public virtual DbSet<Role> Roles { get; set; }
         public virtual DbSet<Category> Categories { get; set; }
         public virtual DbSet<CartItem> ShoppingCartItems { get; set; }
 

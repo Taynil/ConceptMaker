@@ -23,7 +23,7 @@ namespace ConceptMaker
                       "~/Scripts/bootstrap.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
-                      "~/Content/bootstrap.css",
+                      "~/Content/bootstrapdarkly.css",
                       "~/Content/site.css"));
         }
     }

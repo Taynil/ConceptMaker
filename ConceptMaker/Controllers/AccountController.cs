@@ -162,7 +162,7 @@ namespace ConceptMaker.Controllers
                     var result2 = userManager.AddToRole(user.Id, "Client");
                     using (var db = new ConceptMakerContext())
                     {
-                        db.Profiles.Add(new Models.Profile { Username = model.Email, RegisteredDate = DateTime.Now, RoleId = 2 });
+                     //   db.Profiles.Add(new Models.Profile { Username = model.Email, RegisteredDate = DateTime.Now, RoleId = 2 });
                         db.SaveChanges();
 
                     }

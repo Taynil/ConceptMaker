@@ -6,32 +6,52 @@
 }
 
 <div class="jumbotron">
-    <h1>Konfigurujemy</h1>
+    
+    <h1>Konfigurujemy <img src="~/Photos/configureinprogress.png" width="90" height="90" allign="left" /> </h1>
 </div>
-<h2>część 3. </h2>
+<h4>Odnaleziono nastepujące instancje dla wybranej kategorii </h4>
 
 @using (Html.BeginForm("ChoseInstance", "MakeConcept", FormMethod.Get))
 {
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
 }
-<table class="table">
-@foreach (var item in Model)
-{
+<table class="table table-striped table-hover ">
+
+    <thead>
+        <tr>
+            <th>
+                Typ
+            </th>
+            <th>
+                Nazwa instancji
+            </th>
+            <th>
+                Elementy pasujace:
+            </th>
+
+        </tr>
+    </thead>
+
+    @foreach (var item in Model)
+    {
     <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Concept.Name)
+        </td>
         <td>
             @Html.DisplayFor(modelItem => item.Name)
         </td>
         <td>
-            @Html.ActionLink("Przejdz Dalej", "ChoseIngredients", new { id = item.Id, idconceptu= item.ConceptId })
+            @Html.ActionLink("Pokaz pasujace elementy", "ChoseIngredients", new { id = item.Id, idconceptu = item.ConceptId })
 
         </td>
     </tr>
-}
-  </table>
+    }
+</table>
 
 
 
 
-    </dl>
+   
 

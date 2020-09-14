@@ -5,6 +5,11 @@ VisualStudioVersion = 15.0.27703.2042
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConceptMaker", "ConceptMaker\ConceptMaker.csproj", "{85D3F69A-E1D2-4801-A502-AF3F216C574B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XUnitTestProject1", "XUnitTestProject1\XUnitTestProject1.csproj", "{BBCA99DC-08BB-456E-A19D-98CD557AA828}"
+	ProjectSection(ProjectDependencies) = postProject
+		{85D3F69A-E1D2-4801-A502-AF3F216C574B} = {85D3F69A-E1D2-4801-A502-AF3F216C574B}
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +20,10 @@ Global
 		{85D3F69A-E1D2-4801-A502-AF3F216C574B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{85D3F69A-E1D2-4801-A502-AF3F216C574B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{85D3F69A-E1D2-4801-A502-AF3F216C574B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BBCA99DC-08BB-456E-A19D-98CD557AA828}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BBCA99DC-08BB-456E-A19D-98CD557AA828}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BBCA99DC-08BB-456E-A19D-98CD557AA828}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BBCA99DC-08BB-456E-A19D-98CD557AA828}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,41 +1,43 @@
 ﻿@model IEnumerable<ConceptMaker.Models.Category>
 
 @{
-                /**/
 
-                /**/  /**/
-
-                ViewBag.Title = "Konfiguracja";
+    ViewBag.Title = "Konfiguracja";
 }
-
 <div class="jumbotron">
-    <h1>Konfigurujemy </h1>
+    <h1>Konfigurujemy     <img src="~/Photos/configureinprogress.png" width="90" height="90" allign="left" /> </h1>
+
 
 
 </div>
 <h2>część 1.. </h2>
 
-<h4>Wybierz pojecie poczatkowe od którego chcesz zacząć: </h4>
-<table class="table">
-    <tr>
-        <th>
-            @Html.ActionLink("Nazwa Kategorii", "Index", new { sortOrder = ViewBag.NameSortParm })
-        </th>
-
-
-    </tr>
-
-    @foreach (var item in Model)
-    {
+<h4>Wybierz Kategorie ktorej potrzebujesz: </h4>
+<table class="table table-striped table-hover ">
+    <thead>
         <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.ActionLink("Przejdz Dalej", "ChoseCategory", new { id = item.Id })
+            <th >
+                @Html.ActionLink("Nazwa Kategorii", "Index", new { sortOrder = ViewBag.NameSortParm })
+            </th>
+            <th >
+                Wybierz:
+            </th>
 
-            </td>
         </tr>
-    }
+    </thead>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td >
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td >
+                    @Html.ActionLink(" Wybierz i Przejdz Dalej", "ChoseCategory", new { id = item.Id })
+
+
+                </td>
+            </tr>
+        }
 
 </table>
